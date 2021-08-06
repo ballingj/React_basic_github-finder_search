@@ -7,8 +7,7 @@ export class Search extends Component {
   
   onSubmit = (e) => {
     e.preventDefault();  //prevents the default behavior of the submit 
-    this.props.searchUsers(this.state.text);    // this is a function that we call up the chain App.js
-    this.setState({ text: '' })   // clear the text in the form after
+    console.log(this.state.text);
   }
 
   onChange = (e) => {
