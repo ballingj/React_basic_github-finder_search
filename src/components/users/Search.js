@@ -6,7 +6,7 @@ export class Search extends Component {
   }
   
   onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();  //prevents the default behavior of the submit 
     console.log(this.state.text);
   }
 
