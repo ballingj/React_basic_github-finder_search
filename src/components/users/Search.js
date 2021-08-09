@@ -10,13 +10,18 @@ export class Search extends Component {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
+    setAlart: PropTypes.func.isRequired,
   }
 
   onSubmit = (e) => {
-    e.preventDefault();  //prevents the default behavior of the submit 
-    this.props.searchUsers(this.state.text);    // this is a function that we call up the chain App.js
-    this.setState({ text: '' })   // clear the text in the form after
-  }
+    e.preventDefault();  //prevents the default behavior of the submit
+    if (this.state.text === '') {
+      this.props.setAlert('Please enter a search term', 'light');
+    } else {
+      this.props.searchUsers(this.state.text);    // this is a function that we call up the chain App.js
+      this.setState({ text: '' })   // clear the text in the form after
+    }
+  };
 
   onChange = (e) => {
     //this.setState({ text: e.target.value }) //e is for event -target.value is the content of the input
