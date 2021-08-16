@@ -1,14 +1,11 @@
 //added the Search component section4
-import React, { Fragment, Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { Component } from 'react';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
 import { Alert } from './components/layout/Alert'
-import { About } from './components/pages/About';
 import axios from 'axios';
 import './App.css';
-
 
 class App extends Component {
   state = {
@@ -17,7 +14,6 @@ class App extends Component {
     alert: null,
   }
 
-  //The following code was from the video, but no longer works due to the new token security
   // async componentDidMount() {
   //   this.setState({ loading: true });
 
@@ -54,33 +50,19 @@ class App extends Component {
   render() {
     const { users, loading } = this.state;
     return (
-      <Router>
-        <div className="App">
-          <Navbar />
-          <div className="container">
-            <Alert alert={this.state.alert} />
-            <Switch>
-              <Route
-                exact path='/'
-                render={props => (
-                  <Fragment>
-                    <Search
-                      searchUsers={this.searchUsers}
-                      clearUsers={this.clearUsers}
-                      showClear={users.length > 0 ? true : false}
-                      setAlert={this.setAlert}
-                    />
-                    <Users loading={loading} users={users}/>
-                  </Fragment>
-                )}
-              />
-              <Route exact path='/about' component={About} />
-            </Switch>
-            
-          </div>
-          
-          </div>
-      </Router>
+      <div className="App">
+        <Navbar />
+        <div className="container">
+          <Alert alert={ this.state.alert }/>
+          <Search searchUsers={this.searchUsers}
+            clearUsers={this.clearUsers}
+            showClear={users.length > 0 ? true : false}
+            setAlert={this.setAlert}
+          />
+          <Users loading={loading} users={users}/>
+        </div>
+        
+      </div>
     );
   }
 }
