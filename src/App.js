@@ -10,7 +10,6 @@ import { About } from './components/pages/About';
 import axios from 'axios';
 import './App.css';
 
-
 const App = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
