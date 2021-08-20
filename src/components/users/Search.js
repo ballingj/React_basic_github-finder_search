@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import GithubContext from '../../context/github/githubContext';
 
-const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
+const Search = ({ showClear, clearUsers, setAlert }) => {
+  const githubContext = useContext(GithubContext);
+  
   const [text, setText] = useState('');
   
   const onSubmit = (e) => {
@@ -8,7 +11,7 @@ const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
     if (text === '') {
       setAlert('Please enter a search term', 'light');
     } else {
-      searchUsers(text)    // this is a function that we call up the chain App.js
+      githubContext.searchUsers(text)  
       setText('')         // clear the text in the form after
     }
   };
@@ -32,5 +35,6 @@ const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
     </div>
   )
 }
+
 
 export default Search
