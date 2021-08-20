@@ -10,7 +10,7 @@ export class Search extends Component {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
-    setAlart: PropTypes.func.isRequired,
+    setAlart: PropTypes.func,
   }
 
   onSubmit = (e) => {
