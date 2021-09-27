@@ -1,15 +1,17 @@
 import React, { useState, useContext } from 'react';
 import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext'
 
-const Search = ({ setAlert }) => {
+const Search = () => {
   const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
   
   const [text, setText] = useState('');
   
   const onSubmit = (e) => {
     e.preventDefault();  //prevents the default behavior of the submit
     if (text === '') {
-      setAlert('Please enter a search term', 'light');
+      alertContext.setAlert('Please enter a search term', 'light');
     } else {
       githubContext.searchUsers(text)  
       setText('')         // clear the text in the form after
@@ -35,6 +37,5 @@ const Search = ({ setAlert }) => {
     </div>
   )
 }
-
 
 export default Search
