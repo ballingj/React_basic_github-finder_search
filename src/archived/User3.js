@@ -1,42 +1,24 @@
-import React, { useEffect, Fragment, useContext } from 'react'
-import { Link } from 'react-router-dom'
-
-import GithubContext from '../../context/github/githubContext'
+import React, { Fragment, useEffect, useContext } from 'react'
 import { Spinner } from '../layout/Spinner'
 import Repos from '../repos/Repos'
-import { getUserAndRepos } from '../../context/github/actions'
-import { GET_USER_AND_REPOS, SET_LOADING } from '../../context/types'
+import { Link } from 'react-router-dom';
+import GithubContext from '../../context/github/githubContext';
 
-const User = ({ match: { params } }) => {
-  const {
-    user: {
-      name,
-      avatar_url,
-      location,
-      bio,
-      login,
-      html_url,
-      followers,
-      following,
-      public_gists,
-      public_repos,
-      hireable,
-      blog,
-      company
-    },
-    loading,
-    dispatch,
-    repos
-  } = useContext(GithubContext)
-
+const User = ({ match }) => {
+  const githubContext = useContext(GithubContext);
+  const { getUser, loading, user, repos, getUserRepos } = githubContext;
+  
   useEffect(() => {
-    dispatch({ type: SET_LOADING })
-    getUserAndRepos(params.login).then(res =>
-      dispatch({ type: GET_USER_AND_REPOS, payload: res })
-    )
-  }, [dispatch, params.login])
+    getUser(match.params.login);
+    getUserRepos(match.params.login);
+    // eslint-disable-next-line
+  }, []);
+  
+  
 
-  if (loading) return <Spinner />
+    const { name, company, avatar_url, location, bio, blog, login, html_url, followers, following, public_repos, public_gists, hireable } = user;
+  
+    if (loading) return <Spinner />
 
     return (
       <Fragment>
